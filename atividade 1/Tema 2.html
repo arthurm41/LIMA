@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Basquete Todo Dia</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #0a0059;
+            color: white;
+            padding: 30px 20px 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        header p {
+            margin: 5px 0 10px;
+            font-size: 18px;
+            font-style: italic;
+        }
+
+        nav {
+            background-color: #10006f;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffcc00;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            gap: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .main-content {
+            flex: 2;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar {
+            flex: 1;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        article {
+            margin-bottom: 40px;
+        }
+
+        article h2 {
+            margin: 15px 0 10px;
+            font-size: 24px;
+        }
+
+        article p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .noticia-img {
+            width: 100%;
+            height: auto;
+            max-height: 350px;
+            object-fit: contain;
+            border-radius: 2px;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .sidebar h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: #444072;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .main-content, .sidebar {
+                flex: 100%;
+            }
+
+            nav a {
+                display: block;
+                margin: 8px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Basquete Todo Dia</h1>
+        <p>Veja as principais notícias da NBA</p>
+    </header>
+
+    <nav>
+        <a href="Tema 2.1.html">🏆 NBA Finals 2025</a>
+    </nav>
+
+    <div class="container">
+        <div class="main-content">
+            <article>
+                <img class="noticia-img" src="kd.jpg" alt="Kevin Durant">
+                <h2>Jogador Kevin Durant é draftado para o Rockets</h2>
+                <p>Durant deixa Phoenix após uma temporada decepcionante de 2024-25, terminando com 36-46 e ficando de fora dos playoffs.</p>
+            </article>
+
+            <article>
+                <img class="noticia-img" src="cooper.jpg" alt="Cooper Flagg">
+                <h2>Cooper Flagg é o novo calouro da NBA</h2>
+                <p>Cooper Flagg foi a primeira escolha do draft da NBA de 2025, selecionado pelo Dallas Mavericks.</p>
+            </article>
+        </div>
+
+        <div class="sidebar">
+            <h3>LeBron James pensa em se aposentar</h3>
+            <img class="noticia-img" src="lebron.jpg" alt="LeBron James">
+            <p>LeBron James, aos 40 anos e em sua 22ª temporada na NBA, está considerando a aposentadoria. Ele tem uma "player option" para a temporada 2025/26 com os Los Angeles Lakers, mas ainda não decidiu se irá exercê-la. A decisão sobre seu futuro na liga será tomada em conjunto com sua família e após uma avaliação pessoal sobre o tempo restante para jogar em alto nível.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Basquete Todo Dia. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
