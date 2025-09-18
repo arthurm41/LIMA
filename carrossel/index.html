@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Vitrine 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {font-family:'Poppins',sans-serif; background:#fafafa; color:#111;}
+
+    header {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:20px; background:#fff; border-bottom:1px solid #ddd;
+    }
+    header h1 {font-size:20px; font-weight:600;}
+    header nav a {margin:0 10px; color:#333; text-decoration:none;}
+    header nav a:hover {text-decoration:underline;}
+
+    /* Carrossel */
+    .carousel {
+      position:relative; width:100%; height:70vh; overflow:hidden;
+    }
+    .slides {
+      display:flex; transition:transform 0.6s ease;
+      height:100%;
+    }
+    .slides img {
+      width:100%; object-fit:cover; flex-shrink:0;
+    }
+    .arrow {
+      position:absolute; top:50%; transform:translateY(-50%);
+      font-size:40px; color:#fff; background:rgba(0,0,0,0.4);
+      border:none; cursor:pointer; padding:5px 15px; border-radius:50%;
+    }
+    .arrow.left {left:20px;}
+    .arrow.right {right:20px;}
+
+    /* Produtos */
+    main {max-width:1200px; margin:40px auto; padding:0 20px;}
+    .produtos {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px;
+    }
+    .card {
+      background:#fff; border:1px solid #ddd; border-radius:8px;
+      overflow:hidden; transition:0.3s;
+    }
+    .card img {width:100%; height:250px; object-fit:cover;}
+    .card-body {padding:15px;}
+    .card-body h3 {font-size:18px; margin-bottom:8px;}
+    .preco {color:#005b5b; font-weight:bold; margin-bottom:10px;}
+    .card button {
+      background:#005b5b; color:#fff; border:none; padding:10px;
+      width:100%; border-radius:6px; cursor:pointer;
+    }
+    .card button:hover {background:#003d3d;}
+
+    /* Carrinho lateral */
+    #carrinho {
+      position:fixed; top:0; right:-400px; width:350px; height:100%;
+      background:#fff; border-left:1px solid #ddd;
+      box-shadow:-5px 0 10px rgba(0,0,0,0.1);
+      transition:0.4s; padding:20px; overflow-y:auto; z-index:1000;
+    }
+    #carrinho.ativo {right:0;}
+    #carrinho h2 {margin-bottom:20px;}
+    #lista-carrinho {list-style:none; margin-bottom:20px;}
+    #lista-carrinho li {
+      display:flex; justify-content:space-between; margin-bottom:10px;
+    }
+    #lista-carrinho button {
+      background:red; color:#fff; border:none; padding:3px 6px;
+      border-radius:4px; cursor:pointer;
+    }
+    #total {font-weight:bold;}
+    #abrirCarrinho {
+      position:fixed; top:20px; right:20px;
+      background:#005b5b; color:#fff; border:none;
+      padding:10px 15px; border-radius:6px; cursor:pointer; z-index:1100;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Vitrine 2025</h1>
+    <nav>
+      <a href="#">Novidades</a>
+      <a href="#">Roupas</a>
+      <a href="#">Bolsas</a>
+      <a href="#">Perfumes</a>
+    </nav>
+  </header>
+
+  <!-- Botão carrinho -->
+  <button id="abrirCarrinho">🛒 Carrinho</button>
+
+  <!-- Carrossel -->
+  <div class="carousel">
+    <div class="slides">
+      <img src="casaco_bege.png" alt="Look 1">
+      <img src="bolsa_rosa_helena.png" alt="Look 2">
+      <img src="creed_aventus.png" alt="Look 3">
+    </div>
+    <button class="arrow left" onclick="mudarSlide(-1)">&#10094;</button>
+    <button class="arrow right" onclick="mudarSlide(1)">&#10095;</button>
+  </div>
+
+  <!-- Produtos -->
+  <main>
+    <h2>Produtos em Destaque</h2>
+    <div class="produtos">
+      <div class="card">
+        <img src="casaco_bege.png" alt="Casaco">
+        <div class="card-body">
+          <h3>Casaco de Inverno</h3>
+          <p class="preco">R$ 799,00</p>
+          <button onclick="adicionarCarrinho('Casaco de Inverno', 799)">Adicionar</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="bolsa_rosa_helena.png" alt="Bolsa">
+        <div class="card-body">
+          <h3>Bolsa Elegante</h3>
+          <p class="preco">R$ 999,00</p>
+          <button onclick="adicionarCarrinho('Bolsa Elegante', 999)">Adicionar</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="creed_aventus.png" alt="Perfume">
+        <div class="card-body">
+          <h3>Perfume Exclusivo</h3>
+          <p class="preco">R$ 459,00</p>
+          <button onclick="adicionarCarrinho('Perfume Exclusivo', 459)">Adicionar</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Carrinho -->
+  <div id="carrinho">
+    <h2>Meu Carrinho</h2>
+    <ul id="lista-carrinho"></ul>
+    <p>Total: R$ <span id="total">0,00</span></p>
+    <button onclick="finalizarCompra()">Finalizar Compra</button>
+  </div>
+
+  <script>
+    /* Carrossel */
+    let slideIndex = 0;
+    const slides = document.querySelector('.slides');
+    const totalSlides = slides.children.length;
+
+    function mudarSlide(n) {
+      slideIndex = (slideIndex + n + totalSlides) % totalSlides;
+      slides.style.transform = `translateX(-${slideIndex * 100}%)`;
+    }
+
+    /* Carrinho */
+    let carrinho = [];
+    const carrinhoDiv = document.getElementById('carrinho');
+
+    document.getElementById('abrirCarrinho').onclick = () => {
+      carrinhoDiv.classList.toggle('ativo');
+    };
+
+    function adicionarCarrinho(nome, preco) {
+      carrinho.push({nome, preco});
+      atualizarCarrinho();
+    }
+
+    function atualizarCarrinho() {
+      const lista = document.getElementById('lista-carrinho');
+      lista.innerHTML = '';
+      let total = 0;
+      carrinho.forEach((item, idx) => {
+        total += item.preco;
+        const li = document.createElement('li');
+        li.textContent = `${item.nome} — R$ ${item.preco.toFixed(2)}`;
+        const btn = document.createElement('button');
+        btn.textContent = 'X';
+        btn.onclick = () => {
+          carrinho.splice(idx,1);
+          atualizarCarrinho();
+        };
+        li.appendChild(btn);
+        lista.appendChild(li);
+      });
+      document.getElementById('total').textContent = total.toFixed(2);
+    }
+
+    function finalizarCompra() {
+      if(carrinho.length===0) {
+        alert('Carrinho vazio!');
+      } else {
+        alert('Compra finalizada!');
+        carrinho=[];
+        atualizarCarrinho();
+      }
+    }
+  </script>
+</body>
+</html>

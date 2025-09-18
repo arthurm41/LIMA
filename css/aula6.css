@@ -1,0 +1,13 @@
+h1 {
+    width: 300px;
+    height: 50px;
+    background-color: lightblue;
+    border-width: 10px;
+    border-style: solid;
+    border-color: blue;
+    padding: 20px;
+    outline-width: 30px;
+    outline-style: solid;
+    outline-color: red;
+    margin: 50px;
+}
